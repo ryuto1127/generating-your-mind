@@ -122,14 +122,23 @@ supabase_key = os.getenv('SUPABASE_KEY')
 
 @app.route('/')
 def home():
-    selected_questions = random.sample(questions, 3)
-    return render_template('index.html', questions=selected_questions)
+    try:
+        selected_questions = random.sample(questions, 3)
+        app.logger.info("Selected questions: %s", selected_questions)
+        return render_template('index.html', questions=selected_questions)
+    except Exception as e:
+        app.logger.error("Error in home route: %s", e)
+        return f"An error occurred: {e}", 500
 
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
         answers = request.form.getlist('answer')
+        app.logger.info("User answers: %s", answers)
+        
         prompt = "Create an abstract image based on these answers: " + ", ".join(answers)
+        app.logger.info("Generated prompt: %s", prompt)
+        
         response = openai.Image.create(
             model="dall-e-3",
             prompt=prompt,
@@ -137,6 +146,7 @@ def submit():
             size="1024x1024"
         )
         image_url = response['data'][0]['url']
+        app.logger.info("Generated image URL: %s", image_url)
         
         # Save the image URL and answers to Supabase
         data = {
@@ -148,12 +158,12 @@ def submit():
             "Authorization": f"Bearer {supabase_key}",
             "Content-Type": "application/json"
         }
-        response = requests.post(f"{supabase_url}/rest/v1/your_table_name", json=data, headers=headers)
-        response.raise_for_status()
+        supabase_response = requests.post(f"{supabase_url}/rest/v1/your_table_name", json=data, headers=headers)
+        supabase_response.raise_for_status()
         
         return render_template('result.html', image_url=image_url)
     except Exception as e:
-        app.logger.error(f"Error processing request: {e}")
+        app.logger.error("Error in submit route: %s", e)
         return f"An error occurred: {e}", 500
 
 if __name__ == "__main__":
