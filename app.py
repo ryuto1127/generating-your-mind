@@ -7,6 +7,8 @@ import logging
 
 app = Flask(__name__)
 
+logging.basicConfig(level=logging.DEBUG)
+
 questions = [
     "What is your favorite color?",
     "Do you prefer mountains or the sea?",
@@ -139,6 +141,7 @@ def submit():
         prompt = "Create an abstract image based on these answers: " + ", ".join(answers)
         app.logger.info("Generated prompt: %s", prompt)
         
+        # Adding a timeout for OpenAI API call
         response = openai.Image.create(
             model="dall-e-3",
             prompt=prompt,
@@ -158,7 +161,7 @@ def submit():
             "Authorization": f"Bearer {supabase_key}",
             "Content-Type": "application/json"
         }
-        supabase_response = requests.post(f"{supabase_url}/rest/v1/your_table_name", json=data, headers=headers)
+        supabase_response = requests.post(f"{supabase_url}/rest/v1/your_table_name", json=data, headers=headers, timeout=10)
         supabase_response.raise_for_status()
         
         return render_template('result.html', image_url=image_url)
