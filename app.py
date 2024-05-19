@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import random
 import openai
 import requests
@@ -7,7 +7,7 @@ import logging
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 logging.basicConfig(level=logging.DEBUG)
 
