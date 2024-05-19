@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Visualizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Mind Visualizer</h1>
+    <form method="post" action="/submit">
+        {% for question in questions %}
+            <div>
+                <label>{{ question }}</label>
+                <input type="text" name="answer">
+            </div>
+        {% endfor %}
+        <button type="submit" class="circle-button">Submit</button>
+    </form>
+</body>
+</html>
