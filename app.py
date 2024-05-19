@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import random
 import openai
 import requests
 import os
 import logging
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -168,6 +168,11 @@ def submit():
     except Exception as e:
         app.logger.error("Error in submit route: %s", e)
         return f"An error occurred: {e}", 500
+
+# Route for favicon.ico
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
 
 if __name__ == "__main__":
     app.run(debug=True)
