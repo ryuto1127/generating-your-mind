@@ -141,10 +141,9 @@ def submit():
         
         # Adding a timeout for OpenAI API call
         response = openai.Image.create(
-            model="dall-e-2",
             prompt=prompt,
             n=1,
-            size="256x256",
+            size="512x512",  # Reduce image size to mitigate timeout issues
             timeout=60  # Increased timeout to 60 seconds
         )
         image_url = response['data'][0]['url']
