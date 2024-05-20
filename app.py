@@ -138,12 +138,11 @@ def submit():
         prompt = "Create an abstract image based on these answers: " + ", ".join(answers)
         app.logger.info("Generated prompt: %s", prompt)
         
-        # Adding a timeout for OpenAI API call
+        # Remove the timeout parameter
         response = openai.Image.create(
             prompt=prompt,
             n=1,
-            size="512x512",  # Reduce image size to mitigate timeout issues
-            timeout=60  # Increased timeout to 60 seconds
+            size="512x512"  # Reduce image size to mitigate timeout issues
         )
         image_url = response['data'][0]['url']
         app.logger.info("Generated image URL: %s", image_url)
