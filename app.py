@@ -140,9 +140,10 @@ def submit():
         
         # Remove the timeout parameter
         response = openai.Image.create(
+            model="dall-e-3",
             prompt=prompt,
             n=1,
-            size="512x512"  # Reduce image size to mitigate timeout issues
+            size="1024x1024"  # Reduce image size to mitigate timeout issues
         )
         image_url = response['data'][0]['url']
         app.logger.info("Generated image URL: %s", image_url)
