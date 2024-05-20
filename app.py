@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import random
 import openai
-import requests
 import os
 import logging
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
 
 app = Flask(__name__, static_folder='static')
 
@@ -121,21 +118,7 @@ questions = [
 ]
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
-supabase_url = os.getenv('SUPABASE_URL')
-supabase_key = os.getenv('SUPABASE_KEY')
 
-
-# Configure retries for requests
-retry_strategy = Retry(
-    total=3,
-    status_forcelist=[429, 500, 502, 503, 504],
-    method_whitelist=["HEAD", "GET", "OPTIONS", "POST"],
-    backoff_factor=1
-)
-adapter = HTTPAdapter(max_retries=retry_strategy)
-http = requests.Session()
-http.mount("https://", adapter)
-http.mount("http://", adapter)
 
 @app.route('/')
 def home():
@@ -156,9 +139,8 @@ def submit():
         prompt = "Create an abstract image based on these answers: " + ", ".join(answers)
         app.logger.info("Generated prompt: %s", prompt)
         
-        # Adding a timeout and retry logic for OpenAI API call
+        # Adding a timeout for OpenAI API call
         response = openai.Image.create(
-            model="dall-e-3",
             prompt=prompt,
             n=1,
             size="1024x1024",
@@ -166,19 +148,6 @@ def submit():
         )
         image_url = response['data'][0]['url']
         app.logger.info("Generated image URL: %s", image_url)
-        
-        # Save the image URL and answers to Supabase
-        data = {
-            "answers": answers,
-            "image_url": image_url
-        }
-        headers = {
-            "apikey": supabase_key,
-            "Authorization": f"Bearer {supabase_key}",
-            "Content-Type": "application/json"
-        }
-        supabase_response = http.post(f"{supabase_url}/rest/v1/your_table_name", json=data, headers=headers, timeout=10)
-        supabase_response.raise_for_status()
         
         return render_template('result.html', image_url=image_url)
     except Exception as e:
