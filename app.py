@@ -150,6 +150,9 @@ def submit():
         app.logger.info("Generated image URL: %s", image_url)
         
         return render_template('result.html', image_url=image_url)
+    except openai.error.Timeout as e:
+        app.logger.error("OpenAI API request timed out: %s", e)
+        return f"OpenAI API request timed out. Please try again.", 504
     except Exception as e:
         app.logger.error("Error in submit route: %s", e)
         return f"An error occurred: {e}", 500
