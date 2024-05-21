@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e28b27cd-3261-4f4a-81b1-140141e0445b/resourceGroups/ryuto/providers/Microsoft.Web/sites/generating-your-mind",
+    "appService.deploySubpath": "."
+}
