@@ -139,10 +139,9 @@ def submit():
         app.logger.info("Generated prompt: %s", prompt)
         
         response = openai.Image.create(
-            model="dall-e-3",
             prompt=prompt,
             n=1,
-            size="1024x1024"  # Reduce image size to mitigate timeout issues
+            size="1024x1024"
         )
         image_url = response['data'][0]['url']
         app.logger.info("Generated image URL: %s", image_url)
@@ -150,7 +149,7 @@ def submit():
         return render_template('result.html', image_url=image_url)
     except openai.error.Timeout as e:
         app.logger.error("OpenAI API request timed out: %s", e)
-        return f"OpenAI API request timed out. Please try again.", 504
+        return "OpenAI API request timed out. Please try again.", 504
     except Exception as e:
         app.logger.error("Error in submit route: %s", e)
         return f"An error occurred: {e}", 500
