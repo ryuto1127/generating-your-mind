@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/Users/ryuto/Desktop/gpt-web-service/venv/bin/python3
+=======
+#!/Users/ryuto/Desktop/gpt-web-service/generating-your-mind/venv/bin/python3.12
+>>>>>>> 5d841102318d82a2d04a914b85bb49d383574933
 # -*- coding: utf-8 -*-
 import re
 import sys

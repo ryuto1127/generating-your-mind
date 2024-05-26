@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 #!/Users/ryuto/Desktop/gpt-web-service/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
 from charset_normalizer.cli import cli_detect
+=======
+#!/Users/ryuto/Desktop/gpt-web-service/generating-your-mind/venv/bin/python3.12
+# -*- coding: utf-8 -*-
+import re
+import sys
+from charset_normalizer.cli.normalizer import cli_detect
+>>>>>>> 5d841102318d82a2d04a914b85bb49d383574933
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(cli_detect())

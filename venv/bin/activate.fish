@@ -33,7 +33,11 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< HEAD
 set -gx VIRTUAL_ENV "/Users/ryuto/Desktop/gpt-web-service/venv"
+=======
+set -gx VIRTUAL_ENV "/Users/ryuto/Desktop/gpt-web-service/generating-your-mind/venv"
+>>>>>>> 5d841102318d82a2d04a914b85bb49d383574933
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
