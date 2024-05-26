@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 100px auto;
+    margin: 20px auto;
+    padding: 0 10px; /* Add some padding for mobile */
 }
 
 h1 {
@@ -19,6 +20,8 @@ div {
 input[type="text"] {
     padding: 5px;
     margin-top: 5px;
+    width: 100%; /* Make input full width on mobile */
+    box-sizing: border-box;
 }
 
 .circle-button {
@@ -50,7 +53,7 @@ input[type="text"] {
 }
 
 .result-image {
-    max-width: 100%;
+    max-width: 80%; /* Change image size to 80% of the full screen */
     height: auto;
 }
 
@@ -68,3 +71,40 @@ input[type="text"] {
 .back-link:hover {
     background-color: #45a049;
 }
+
+/* Media queries for responsive design */
+
+/* Styles for tablets and larger devices */
+@media (min-width: 600px) {
+    body {
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    input[type="text"] {
+        width: 50%;
+    }
+
+    .circle-button {
+        width: 100px; /* Larger button on larger screens */
+        height: 50px;
+    }
+}
+
+/* Styles for desktops and larger devices */
+@media (min-width: 1024px) {
+    body {
+        margin: 100px auto;
+        padding: 0 40px;
+    }
+
+    input[type="text"] {
+        width: 40%;
+    }
+
+    .circle-button {
+        width: 120px; /* Larger button on larger screens */
+        height: 60px;
+    }
+}
+

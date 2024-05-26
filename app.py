@@ -1,14 +1,17 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import random
 from openai import OpenAI
 import os
 import logging
+from opencensus.ext.azure.log_exporter import AzureLogHandler # type: ignore
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = Flask(__name__, static_folder='static')
 
 logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(connection_string="InstrumentationKey=c316a918-2301-4373-ba79-204e44f3d81a;IngestionEndpoint=https://japaneast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://japaneast.livediagnostics.monitor.azure.com/;ApplicationId=b046141a-9771-4de3-8ed1-2e1842bec1b0"))
 
 questions = [
     "What is your favorite color?",
@@ -47,15 +50,14 @@ questions = [
 @app.route("/", methods=["GET"])
 def index():
     selected_questions = random.sample(questions, 3)
-    logging.info(f"Selected questions: {selected_questions}")
+    logger.info(f"Selected questions: {selected_questions}")
     return render_template("index.html", questions=selected_questions)
 
-@app.route("/submit", methods=["POST"])
 @app.route("/submit", methods=["POST"])
 def submit():
     try:
         user_answers = request.form.getlist("answer")
-        logging.info(f"User answers: {user_answers}")
+        logger.info(f"User answers: {user_answers}")
         prompt = "Create an abstract image based on these answers: " + ", ".join(user_answers)
 
         response = client.images.generate(
@@ -66,15 +68,12 @@ def submit():
             size="1024x1024"
         )
 
-        logging.info(f"API Response: {response}")
-        
         image_url = response.data[0].url
         return render_template("result.html", image_url=image_url)
-    
-    except Exception as e:
-        logging.error(f"Exception on /submit: {e}")
-        return f"An error occurred: {e}"
 
+    except Exception as e:
+        logger.error(f"Exception on /submit: {e}")
+        return f"An error occurred: {e}"
 
 if __name__ == "__main__":
     app.run(debug=True)
