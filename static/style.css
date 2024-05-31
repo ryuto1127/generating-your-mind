@@ -32,7 +32,7 @@ input[type="text"] {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: auto;
     cursor: pointer;
     width: 70px; /* Width of the button */
     height: 40px; /* Height of the button */
