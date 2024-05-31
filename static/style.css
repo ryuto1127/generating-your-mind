@@ -91,7 +91,7 @@ input[type="text"] {
     }
 
     .result-image {
-        max-width: 90%; /* Ensure image size is more responsive */
+        max-width: 30%; /* Ensure image size is more responsive */
     }
 }
 
