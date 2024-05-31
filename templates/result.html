@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Generated Image</h1>
-    <div>
-        <img src="{{ image_url }}" alt="Generated Image">
+    <div class="container">
+        <h1>Generated Image</h1>
+        <div>
+            <img src="{{ image_url }}" alt="Generated Image" class="result-image">
+        </div>
+        <a href="/" class="back-link">Back to Home</a>
     </div>
-    <a href="/">Back to Home</a>
 </body>
 </html>
-

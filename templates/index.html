@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Mind Visualizer</h1>
-    <form method="post" action="/submit">
-        {% for question in questions %}
-            <div>
-                <label>{{ question }}</label>
-                <input type="text" name="answer">
-            </div>
-        {% endfor %}
-        <button type="submit" class="circle-button">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Mind Visualizer</h1>
+        <form method="post" action="/submit">
+            {% for question in questions %}
+                <div>
+                    <label>{{ question }}</label>
+                    <input type="text" name="answer">
+                </div>
+            {% endfor %}
+            <button type="submit" class="circle-button">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
+

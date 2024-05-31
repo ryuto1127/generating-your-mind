@@ -1,16 +1,28 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 20px auto;
-    padding: 0 10px; /* Add some padding for mobile */
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Background color for the entire page */
+}
+
+.container {
+    background-color: white; /* Background color for the form container */
+    border: 1px solid #ddd; /* Border color for the form container */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 20px auto; /* Center the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add some shadow for a nice effect */
+    max-width: 500px; /* Max width for the form container */
+    box-sizing: border-box;
 }
 
 h1 {
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 form {
-    margin: 20px;
+    margin: 20px 0;
 }
 
 div {
@@ -18,10 +30,12 @@ div {
 }
 
 input[type="text"] {
-    padding: 5px;
+    padding: 10px;
     margin-top: 5px;
-    width: 80%; /* Make input wider for better mobile display */
+    width: 100%;
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .circle-button {
@@ -32,11 +46,14 @@ input[type="text"] {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 10px auto;
     cursor: pointer;
-    width: 70px; /* Width of the button */
-    height: 40px; /* Height of the button */
-    border-radius: 30px; /* Makes the button circular */
+    width: 100%;
+    max-width: 150px; /* Maximum width for the button */
+    height: 50px; /* Height of the button */
+    line-height: 50px; /* Align text vertically */
+    border-radius: 25px; /* Makes the button circular */
+    box-sizing: border-box;
 }
 
 .circle-button:hover {
@@ -72,59 +89,4 @@ input[type="text"] {
     background-color: #45a049;
 }
 
-/* Media queries for responsive design */
-
-/* Styles for phones */
-@media (max-width: 600px) {
-    body {
-        margin: 20px auto;
-        padding: 0 10px;
-    }
-
-    input[type="text"] {
-        width: 90%;
-    }
-
-    .circle-button {
-        width: 70px;
-        height: 40px;
-    }
-
-    .result-image {
-        max-width: 30%; /* Ensure image size is more responsive */
-    }
-}
-
-/* Styles for tablets */
-@media (min-width: 601px) and (max-width: 1024px) {
-    body {
-        margin: 50px auto;
-        padding: 0 20px;
-    }
-
-    input[type="text"] {
-        width: 80%;
-    }
-
-    .circle-button {
-        width: 100px;
-        height: 50px;
-    }
-}
-
-/* Styles for desktops and larger devices */
-@media (min-width: 1025px) {
-    body {
-        margin: 100px auto;
-        padding: 0 40px;
-    }
-
-    input[type="text"] {
-        width: 40%;
-    }
-
-    .circle-button {
-        width: 120px;
-        height: 60px;
-    }
-}
+/* Ensure layout is mobile-first by default, no media queries needed */
