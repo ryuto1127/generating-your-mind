@@ -20,7 +20,7 @@ div {
 input[type="text"] {
     padding: 5px;
     margin-top: 5px;
-    width: 100%; /* Make input full width on mobile */
+    width: 80%; /* Make input wider for better mobile display */
     box-sizing: border-box;
 }
 
@@ -32,7 +32,7 @@ input[type="text"] {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: auto;
+    margin: 4px 2px;
     cursor: pointer;
     width: 70px; /* Width of the button */
     height: 40px; /* Height of the button */
@@ -74,25 +74,46 @@ input[type="text"] {
 
 /* Media queries for responsive design */
 
-/* Styles for tablets and larger devices */
-@media (min-width: 600px) {
+/* Styles for phones */
+@media (max-width: 600px) {
+    body {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    input[type="text"] {
+        width: 90%;
+    }
+
+    .circle-button {
+        width: 70px;
+        height: 40px;
+    }
+
+    .result-image {
+        max-width: 90%; /* Ensure image size is more responsive */
+    }
+}
+
+/* Styles for tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
     body {
         margin: 50px auto;
         padding: 0 20px;
     }
 
     input[type="text"] {
-        width: 50%;
+        width: 80%;
     }
 
     .circle-button {
-        width: 100px; /* Larger button on larger screens */
+        width: 100px;
         height: 50px;
     }
 }
 
 /* Styles for desktops and larger devices */
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
     body {
         margin: 100px auto;
         padding: 0 40px;
@@ -103,7 +124,7 @@ input[type="text"] {
     }
 
     .circle-button {
-        width: 120px; /* Larger button on larger screens */
+        width: 120px;
         height: 60px;
     }
 }
