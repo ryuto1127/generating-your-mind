@@ -20,7 +20,7 @@ div {
 input[type="text"] {
     padding: 5px;
     margin-top: 5px;
-    width: 50%; /* Make input full width on mobile */
+    width: 100%; /* Make input full width on mobile */
     box-sizing: border-box;
 }
 
@@ -107,4 +107,3 @@ input[type="text"] {
         height: 60px;
     }
 }
-
